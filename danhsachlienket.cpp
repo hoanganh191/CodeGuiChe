@@ -42,6 +42,34 @@ node *makeNode(int x)
     return newNode;
 }
 
+void xoa(node *&head, node *m)
+{
+    // TH d/s rong
+    if(head == NULL)
+    {
+        cout<<"\n Danh sach rong";
+        return;
+    }
+    // TH nut tro boi M la nut dau tien cua d/s
+    if(head == m)
+    {
+        head = m->next;
+        free(m);
+        return;
+    }
+    // Tim den nut dung truoc nut tro boi M 
+    node *p = new node();
+    p=head;
+    while(p->next != m)
+    p = p->next;
+    // Loai bo nut tro boi M 
+    p->next = m->next;
+    free(m);
+
+
+
+}
+
 int main()
 {
     cout << "Nhap gia tri nut dau tien: ";
@@ -51,7 +79,7 @@ int main()
     node *head = makeNode(ghi);
     node *temp = head;
 
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 6; i++)
     {
         cout << "Nhap gia tri: ";
         cin >> ghi;
@@ -64,9 +92,6 @@ int main()
     {
         temp = temp->next;
     }
-    cout << "Nhap gia tri muon them sau vi tri thu 4:";
-    int giaTriThem;
-    cin >> giaTriThem;
-    insertAfter(head, temp, giaTriThem);
+    xoa(head, temp);
     duyet(head);
 }
