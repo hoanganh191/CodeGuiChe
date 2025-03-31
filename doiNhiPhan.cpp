@@ -6,11 +6,11 @@
 
 using namespace std;
 
-int doiNhiPhan(int soThapPhan){
+void doiNhiPhan(int soThapPhan){
     if (soThapPhan < 100)
     {
         cout << "Can nhap so > 100 theo de bai";
-        return -1;
+        return;
     }
 
     stack<int> dsPhanDu;
@@ -20,20 +20,18 @@ int doiNhiPhan(int soThapPhan){
         soThapPhan = soThapPhan / 2;
     }
 
-    long ketQua = 0;
     while (!dsPhanDu.empty())
     {
-        ketQua = ketQua * 10 + dsPhanDu.top();
+        cout << dsPhanDu.top();
         dsPhanDu.pop();
     }
     
-    return ketQua;
     
     
     
 }
 
 int main(){
-    cout << doiNhiPhan(125) << endl;
+    doiNhiPhan(189);
 
 }
