@@ -23,6 +23,22 @@ void insertAfter(node *&head, node *m, int x)
     p->next = m->next;
     m->next = p;
 }
+void insertBefore(node *&head, node *m , int x){
+    node *p = new node();
+    // M tro vao dau danh sach
+    if(m == head){
+        p -> info = x;
+        p -> next = m;
+        head = p; 
+    } 
+    else
+    {
+        p -> next = m -> next;
+        m -> next = p;
+        p -> info = m -> info;
+        m -> info = x;
+    }
+}
 
 void duyet(node *head)
 {
@@ -92,6 +108,7 @@ int main()
     {
         temp = temp->next;
     }
-    xoa(head, temp);
+    // xoa(head, temp);
+    insertBefore(head,temp,30);
     duyet(head);
 }
