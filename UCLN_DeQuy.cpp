@@ -3,29 +3,19 @@
 
 using namespace std;
 
-int ucln(int so1, int so2)
+int ucln(int a, int b)
 {
-
-    if (so2 == 0 && so1 == 0)
-    {
-        cout << "Khong ton tai ucln cho 2 so (0,0) : " << endl;
+    if (a == 0 && b == 0) {
+        cout << "Khong ton tai ucln cho 2 so (0,0)" << endl;
         return -1;
     }
 
-    if (so2 == 0 && so1 != 0)
-    {
-        return so1; // Neu co 1 so = 0 thi ucln la so con lai do 0 chia het cho tat ca cac so
-    }
+    if (b == 0)
+        return a;
 
-    if (so1 % so2 == 0)
-    {
-        return so2;
-    }
-    else
-    {
-        return ucln(so2, so1 % so2);
-    }
+    return ucln(b, a % b);
 }
+
 
 int main()
 {
