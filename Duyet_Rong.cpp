@@ -13,10 +13,10 @@ void BFS(int n)
     queue<int> q;
     q.push(n);
     visited[n] = true;
-    cout << n << " ";
     while (!q.empty())
     {
         int temp = q.front();
+        cout << temp << " ";
         q.pop();
         for (int x : dsDinhKe[temp])
         {
@@ -24,7 +24,6 @@ void BFS(int n)
             {
                 q.push(x);
                 visited[x] = true;
-                cout << x << " ";
             }
         }
     }

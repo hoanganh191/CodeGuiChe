@@ -12,7 +12,12 @@ void insertAfter(node *&head, node *m, int x)
 {
     node *p = new node();
     p->info = x;
-
+    if (head == NULL) //Neu danh sach lien ket chua co phan tu nao => them vao dau
+    {
+        head = p;
+        p->next = NULL;
+    }
+    
     if (m == NULL)
     { // Kiểm tra nếu m NULL
         cout << "Node m khong hop le!\n";
