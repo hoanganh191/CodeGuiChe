@@ -2,7 +2,6 @@
 #include <vector>
 #include <queue>
 
-
 using namespace std;
 
 vector<int> dsDinhKe[100]; // Luu ma tran danh sach ke
@@ -29,7 +28,8 @@ void BFS(int n)
     }
 }
 
-int main(){
+int main()
+{
     dsDinhKe[1] = {2, 3};
     dsDinhKe[2] = {1, 4, 5};
     dsDinhKe[3] = {1, 6, 7};
@@ -40,5 +40,3 @@ int main(){
     dsDinhKe[8] = {5, 6, 7};
     BFS(1);
 }
-
-
