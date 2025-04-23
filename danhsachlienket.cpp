@@ -12,12 +12,12 @@ void insertAfter(node *&head, node *m, int x)
 {
     node *p = new node();
     p->info = x;
-    if (head == NULL) //Neu danh sach lien ket chua co phan tu nao => them vao dau
+    if (head == NULL) // Neu danh sach lien ket chua co phan tu nao => them vao dau
     {
         head = p;
         p->next = NULL;
     }
-    
+
     if (m == NULL)
     { // Kiểm tra nếu m NULL
         cout << "Node m khong hop le!\n";
@@ -28,20 +28,29 @@ void insertAfter(node *&head, node *m, int x)
     p->next = m->next;
     m->next = p;
 }
-void insertBefore(node *&head, node *m , int x){
+void insertBefore(node *&head, node *m, int x)
+{
     node *p = new node();
+    // Neu danh sach trong
+    if (head == NULL)
+    {
+        p->info = x;
+        p->next = NULL;
+        head = p;
+    }
     // M tro vao dau danh sach
-    if(m == head){
-        p -> info = x;
-        p -> next = m;
-        head = p; 
-    } 
+    if (m == head)
+    {
+        p->info = x;
+        p->next = m;
+        head = p;
+    }
     else
     {
-        p -> next = m -> next;
-        m -> next = p;
-        p -> info = m -> info;
-        m -> info = x;
+        p->next = m->next;
+        m->next = p;
+        p->info = m->info;
+        m->info = x;
     }
 }
 
@@ -66,29 +75,26 @@ node *makeNode(int x)
 void xoa(node *&head, node *m)
 {
     // TH d/s rong
-    if(head == NULL)
+    if (head == NULL)
     {
-        cout<<"\n Danh sach rong";
+        cout << "\n Danh sach rong";
         return;
     }
     // TH nut tro boi M la nut dau tien cua d/s
-    if(head == m)
+    if (head == m)
     {
         head = m->next;
         free(m);
         return;
     }
-    // Tim den nut dung truoc nut tro boi M 
+    // Tim den nut dung truoc nut tro boi M
     node *p = new node();
-    p=head;
-    while(p->next != m)
-    p = p->next;
-    // Loai bo nut tro boi M 
+    p = head;
+    while (p->next != m)
+        p = p->next;
+    // Loai bo nut tro boi M
     p->next = m->next;
     free(m);
-
-
-
 }
 
 int main()
@@ -114,6 +120,6 @@ int main()
         temp = temp->next;
     }
     // xoa(head, temp);
-    insertBefore(head,temp,30);
+    insertBefore(head, temp, 30);
     duyet(head);
 }
