@@ -1,0 +1,12 @@
+# Load lại mô hình
+with open('lightfm_model.pkl', 'rb') as f:
+    model = pickle.load(f)
+
+# Load lại dataset
+with open('lightfm_dataset.pkl', 'rb') as f:
+    dataset = pickle.load(f)
+
+# Load lại các ma trận đặc trưng
+user_features = scipy.sparse.load_npz('user_features.npz')
+item_features = scipy.sparse.load_npz('item_features.npz')
+interactions_matrix = scipy.sparse.load_npz('interactions_matrix.npz')
