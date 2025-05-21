@@ -91,3 +91,8 @@ results = recommend_for_existing_user(user_id)
 for r in results:
     print(r)
 
+# 4. Lưu mô hình
+pickle.dump(model, open("lightfm_model.pkl", "wb"))
+pickle.dump(dataset, open("dataset.pkl", "wb"))
+scipy.sparse.save_npz("user_features_matrix.npz", user_features)
+scipy.sparse.save_npz("item_features_matrix.npz", item_features)
