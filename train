@@ -44,3 +44,50 @@ item_features = dataset.build_item_features([
 # 3. Huấn luyện mô hình
 model = LightFM(loss='warp')
 model.fit(interactions_matrix, user_features=user_features, item_features=item_features, epochs=10, num_threads=2)
+
+def recommend_for_existing_user(user_id, top_n=5):
+    # Lấy ánh xạ user_id từ dataset
+    user_id_map = dataset.mapping()[0]  # {original_id: internal_id}
+    item_id_map = {v: k for k, v in dataset.mapping()[2].items()}  # {internal_id: original_id}
+
+    if user_id not in user_id_map:
+        print(f"⚠️ User ID '{user_id}' chưa được huấn luyện trong hệ thống.")
+        return []
+
+    # Lấy internal id
+    user_internal_id = user_id_map[user_id]
+
+    # Dự đoán điểm cho toàn bộ item
+    scores = model.predict(
+        user_ids=user_internal_id,
+        item_ids=np.arange(item_features.shape[0]),
+        user_features=user_features,
+        item_features=item_features
+    )
+
+    # Sắp xếp điểm giảm dần
+    top_items_indices = np.argsort(-scores)[:top_n]
+
+    # Lấy thông tin sản phẩm gợi ý
+    recommendations = []
+    for idx in top_items_indices:
+        item_name = item_id_map.get(idx)
+        if item_name in items['Item Purchased'].values:
+            item_info = items[items['Item Purchased'] == item_name].iloc[0]
+            recommendations.append({
+                "Product": item_name,
+                "Category": item_info['Category'],
+                "Size": item_info['Size'],
+                "Color": item_info['Color']
+            })
+        else:
+            print(f"⚠️ Item '{item_name}' không tìm thấy trong dữ liệu sản phẩm.")
+
+    return recommendations
+
+# Ví dụ: Gợi ý cho user ID cụ thể
+user_id = int("1495")  # Thay bằng ID thực tế trong dữ liệu bạn có
+results = recommend_for_existing_user(user_id)
+for r in results:
+    print(r)
+
