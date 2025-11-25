@@ -1,0 +1,548 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package LabMenu;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JToolBar;
+import javax.swing.KeyStroke;
+
+/**
+ *
+ * @author HELLO
+ */
+public class MenuNetBean extends JFrame {
+
+    private JMenuBar menuBar;
+
+    public MenuNetBean() {
+        initGUI();
+        initMenuBar();
+        initToolBar();
+        this.setVisible(true);
+    }
+
+    private void initGUI() {
+        this.setSize(1200, 800);
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setTitle("Menu NetBeans");
+        this.setAlwaysOnTop(true);
+        this.setLayout(new BorderLayout());
+
+    }
+
+    private void initMenuBar() {
+        menuBar = new JMenuBar();
+        initMenuFile();
+        this.setJMenuBar(menuBar);
+    }
+
+    private void initToolBar() {
+        JToolBar toolBar = new JToolBar();
+        toolBar.setFloatable(false);
+
+        JButton btnNewFile = new JButton(resizeImageIcon(new ImageIcon("D:/imgNetBean/newfile.jpg"), 40, 40));
+        btnNewFile.setToolTipText("New File");
+
+        JButton btnNewProject = new JButton(resizeImageIcon(new ImageIcon("D:/imgNetBean/newproject.png"), 40, 40));
+        btnNewProject.setToolTipText("New Project");
+
+        JButton btnOpenProject = new JButton(resizeImageIcon(new ImageIcon("D:/imgNetBean/openproject.png"), 40, 40));
+        btnOpenProject.setToolTipText("Open Project");
+
+        JButton btnSaveAll = new JButton(resizeImageIcon(new ImageIcon("D:/imgNetBean/save-all.jpg"), 40, 40));
+        btnSaveAll.setToolTipText("Save All");
+
+        JButton btnUndo = new JButton(resizeImageIcon(new ImageIcon("D:/imgNetBean/undo.png"), 40, 40));
+        btnUndo.setToolTipText("Undo");
+
+        JButton btnRedo = new JButton(resizeImageIcon(new ImageIcon("D:/imgNetBean/redo.png"), 40, 40));
+        btnRedo.setToolTipText("Redo");
+
+        JButton earth = new JButton(resizeImageIcon(new ImageIcon("D:/imgNetBean/earth-icon.png"), 40, 40));
+        earth.setToolTipText("Earth");
+
+        JButton btnBuild = new JButton(resizeImageIcon(new ImageIcon("D:/imgNetBean/buid.png"), 40, 40));
+        btnBuild.setToolTipText("Build Project");
+
+        JButton btnCleanBuild = new JButton(resizeImageIcon(new ImageIcon("D:/imgNetBean/cleanBuild.png"), 40, 40));
+        btnCleanBuild.setToolTipText("Clean and Build Project");
+
+        JButton btnRun = new JButton(resizeImageIcon(new ImageIcon("D:/imgNetBean/run.png"), 40, 40));
+        btnRun.setToolTipText("Run Project");
+
+        JButton btnRebuild = new JButton(resizeImageIcon(new ImageIcon("D:/imgNetBean/rebuid.png"), 40, 40));
+        btnRebuild.setToolTipText("Run File");
+
+        JButton btnDebugFile = new JButton(resizeImageIcon(new ImageIcon("D:/imgNetBean/debug.png"), 40, 40));
+        btnDebugFile.setToolTipText("Debug File");
+
+        JButton btnUse = new JButton(resizeImageIcon(new ImageIcon("D:/imgNetBean/use.png"), 80, 40));
+        btnRedo.setToolTipText("Use");
+        
+        JButton btnProfile = new JButton(resizeImageIcon(new ImageIcon("D:/imgNetBean/apache-netbeans.jpg"), 40, 40));
+        btnProfile.setToolTipText("Netbean Project");
+
+        JButton btnPause = new JButton(resizeImageIcon(new ImageIcon("D:/imgNetBean/apache-netbeans.jpg"), 40, 40));
+        btnProfile.setToolTipText("Netbean Pause");
+
+        //Thứ tự đầu vào ở đây
+        toolBar.add(btnNewFile);
+        toolBar.add(btnNewProject);
+        toolBar.add(btnOpenProject);
+        toolBar.add(btnSaveAll);
+        toolBar.addSeparator(new Dimension(10, 0));
+        toolBar.add(btnUndo);
+        toolBar.add(btnRedo);
+        String[] options = {"Deafault config", "customize"};
+        JComboBox<String> comboBox = new JComboBox<>(options);
+        toolBar.add(comboBox);
+        toolBar.add(earth);
+        toolBar.add(btnBuild);
+        toolBar.add(btnCleanBuild);
+        toolBar.add(btnRun);
+        toolBar.add(btnRebuild);
+        toolBar.add(btnDebugFile);
+        toolBar.addSeparator(new Dimension(10, 0));
+        toolBar.add(btnUse);
+        toolBar.add(btnProfile);
+        toolBar.add(btnPause);
+
+        add(toolBar, BorderLayout.NORTH);
+
+    }
+
+    private void initMenuFile() {
+        JMenu menuFile = new JMenu("File");
+        createFileMenu(menuFile);
+        menuBar.add(menuFile);
+
+        JMenu menuEdit = new JMenu("Edit");
+        createEditMenu(menuEdit);
+        menuBar.add(menuEdit);
+
+        JMenu menuView = new JMenu("View");
+        createViewMenu(menuView);
+        menuBar.add(menuView);
+
+        JMenu menuNavigate = new JMenu("Navigate");
+        createNavigateMenu(menuNavigate);
+        menuBar.add(menuNavigate);
+
+        JMenu menuSource = new JMenu("Source");
+        createSourceMenu(menuSource);
+        menuBar.add(menuSource);
+
+        JMenu menuRefactor = new JMenu("Refactor");
+        createRefactorMenu(menuRefactor);
+        menuBar.add(menuRefactor);
+
+        JMenu menuRun = new JMenu("Run");
+        createRunMenu(menuRun);
+        menuBar.add(menuRun);
+
+        JMenu menuDebug = new JMenu("Debug");
+        createDebugMenu(menuDebug);
+        menuBar.add(menuDebug);
+
+        JMenu menuProfile = new JMenu("Profile");
+        createProfileMenu(menuProfile);
+        menuBar.add(menuProfile);
+
+        JMenu menuTeam = new JMenu("Team");
+        createTeamMenu(menuTeam);
+        menuBar.add(menuTeam);
+
+        JMenu menuTool = new JMenu("Tool");
+        createToolMenu(menuTool);
+        menuBar.add(menuTool);
+
+        JMenu menuWindow = new JMenu("Window");
+        createWindowMenu(menuWindow);
+        menuBar.add(menuWindow);
+
+        JMenu menuHelp = new JMenu("Help");
+        createHelpMenu(menuHelp);
+        menuBar.add(menuHelp);
+
+    }
+
+    private ImageIcon resizeImageIcon(ImageIcon icon, int width, int height) {
+        Image image = icon.getImage();
+        image = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        return new ImageIcon(image);
+    }
+
+    public static void main(String[] args) {
+        MenuNetBean menu = new MenuNetBean();
+    }
+    
+    private void createFileMenu(JMenu menu) {
+        ImageIcon iconNewFile = new ImageIcon("D:/imgNetBean/newfile.jpg");
+        iconNewFile = resizeImageIcon(iconNewFile, 16, 16);
+        JMenuItem newFile = new JMenuItem("New File", iconNewFile);
+        newFile.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK));
+        menu.add(newFile);
+
+        ImageIcon iconNewProject = new ImageIcon("D:/imgNetBean/openproject.png");
+        iconNewProject = resizeImageIcon(iconNewProject, 16, 16);
+        JMenuItem newProject = new JMenuItem("New Project", iconNewProject);
+        newProject.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK));
+        menu.add(newProject);
+        
+        menu.addSeparator();
+        
+        JMenuItem openFile = new JMenuItem("Open File");
+        openFile.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_DOWN_MASK));
+        menu.add(openFile);
+        
+        JMenuItem openProject = new JMenuItem("Open Project");
+        openProject.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_DOWN_MASK));
+        menu.add(openProject);
+        
+        menu.addSeparator();
+
+        JMenu menuOpenRecentFile = new JMenu("Open Recent File");
+        JMenuItem file1 = new JMenuItem("File 1");
+        menuOpenRecentFile.add(file1);
+        JMenuItem file2 = new JMenuItem("File 2");
+        menuOpenRecentFile.add(file2);
+        JMenuItem file3 = new JMenuItem("File 3");
+        menuOpenRecentFile.add(file3);
+        menu.add(menuOpenRecentFile);
+        
+        menu.addSeparator();
+        
+        JMenuItem save = new JMenuItem("Save");
+        save.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK));
+        menu.add(save);
+        
+        JMenuItem saveAs = new JMenuItem("Save As...");
+        saveAs.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK));
+        menu.add(saveAs);
+        
+        JMenuItem saveAll = new JMenuItem("Save All");
+        menu.add(saveAll);
+        
+        menu.addSeparator();
+        
+        JMenuItem closeFile = new JMenuItem("Close");
+        menu.add(closeFile);
+        
+        JMenuItem closeAll = new JMenuItem("Close All");
+        menu.add(closeAll);
+        
+        menu.addSeparator();
+        
+        JMenuItem pageSetup = new JMenuItem("Page Setup...");
+        menu.add(pageSetup);
+        
+        JMenuItem print = new JMenuItem("Print...");
+        print.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, InputEvent.CTRL_DOWN_MASK));
+        menu.add(print);
+        
+        menu.addSeparator();
+        
+        JMenuItem exit = new JMenuItem("Exit");
+        menu.add(exit);
+    }
+    
+    private void createEditMenu(JMenu menu) {
+        JMenuItem undo = new JMenuItem("Undo");
+        undo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_DOWN_MASK));
+        menu.add(undo);
+        
+        JMenuItem redo = new JMenuItem("Redo");
+        redo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Y, InputEvent.CTRL_DOWN_MASK));
+        menu.add(redo);
+        
+        menu.addSeparator();
+        
+        JMenuItem cut = new JMenuItem("Cut");
+        cut.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_DOWN_MASK));
+        menu.add(cut);
+        
+        JMenuItem copy = new JMenuItem("Copy");
+        copy.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_DOWN_MASK));
+        menu.add(copy);
+        
+        JMenuItem paste = new JMenuItem("Paste");
+        paste.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.CTRL_DOWN_MASK));
+        menu.add(paste);
+        
+        menu.addSeparator();
+        
+        JMenuItem selectAll = new JMenuItem("Select All");
+        selectAll.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_DOWN_MASK));
+        menu.add(selectAll);
+        
+        menu.addSeparator();
+        
+        menu.add(new JMenuItem("Find"));
+        menu.add(new JMenuItem("Find and Replace"));
+        menu.add(new JMenuItem("Find Next"));
+        menu.add(new JMenuItem("Find Previous"));
+        
+        menu.addSeparator();
+        
+        menu.add(new JMenuItem("Go to Line"));
+        menu.add(new JMenuItem("Indent"));
+        menu.add(new JMenuItem("Unindent"));
+    }
+    
+    private void createViewMenu(JMenu menu) {
+        JMenu toolbars = new JMenu("Toolbars");
+        toolbars.add(new JMenuItem("Main Toolbar"));
+        toolbars.add(new JMenuItem("Format Toolbar"));
+        toolbars.add(new JMenuItem("Search Toolbar"));
+        menu.add(toolbars);
+        
+        menu.addSeparator();
+        
+        menu.add(new JMenuItem("Files"));
+        menu.add(new JMenuItem("Projects"));
+        menu.add(new JMenuItem("Favorites"));
+        
+        menu.addSeparator();
+        
+        menu.add(new JMenuItem("Editor"));
+        menu.add(new JMenuItem("Output"));
+        menu.add(new JMenuItem("Navigator"));
+        menu.add(new JMenuItem("Properties"));
+        
+        menu.addSeparator();
+        
+        menu.add(new JMenuItem("Show Line Numbers"));
+        menu.add(new JMenuItem("Show White Spaces"));
+    }
+    
+    private void createNavigateMenu(JMenu menu) {
+        menu.add(new JMenuItem("Go to File"));
+        menu.add(new JMenuItem("Go to Class"));
+        menu.add(new JMenuItem("Go to Line"));
+        
+        menu.addSeparator();
+        
+        menu.add(new JMenuItem("Go to Type"));
+        menu.add(new JMenuItem("Go to Method"));
+        menu.add(new JMenuItem("Go to Symbol"));
+        
+        menu.addSeparator();
+        
+        menu.add(new JMenuItem("Back"));
+        menu.add(new JMenuItem("Forward"));
+        
+        menu.addSeparator();
+        
+        menu.add(new JMenuItem("Previous Bookmark"));
+        menu.add(new JMenuItem("Next Bookmark"));
+    }
+    
+    private void createSourceMenu(JMenu menu) {
+        menu.add(new JMenuItem("Fix Imports"));
+        menu.add(new JMenuItem("Organize Imports"));
+        
+        menu.addSeparator();
+        
+        JMenuItem format = new JMenuItem("Format");
+        format.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I, InputEvent.CTRL_DOWN_MASK));
+        menu.add(format);
+        
+        menu.addSeparator();
+        
+        JMenuItem comment = new JMenuItem("Toggle Comment");
+        comment.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_SLASH, InputEvent.CTRL_DOWN_MASK));
+        menu.add(comment);
+        
+        JMenuItem blockComment = new JMenuItem("Toggle Block Comment");
+        blockComment.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_SLASH, InputEvent.SHIFT_DOWN_MASK));
+        menu.add(blockComment);
+        
+        menu.addSeparator();
+        
+        menu.add(new JMenuItem("Complete Code"));
+        menu.add(new JMenuItem("Generate Getters and Setters"));
+        menu.add(new JMenuItem("Surround with"));
+    }
+    
+    private void createRefactorMenu(JMenu menu) {
+        menu.add(new JMenuItem("Rename"));
+        menu.add(new JMenuItem("Move"));
+        menu.add(new JMenuItem("Copy"));
+        
+        menu.addSeparator();
+        
+        menu.add(new JMenuItem("Extract Method"));
+        menu.add(new JMenuItem("Extract Variable"));
+        menu.add(new JMenuItem("Extract Constant"));
+        
+        menu.addSeparator();
+        
+        menu.add(new JMenuItem("Inline"));
+        menu.add(new JMenuItem("Change Method Signature"));
+        menu.add(new JMenuItem("Introduce Parameter"));
+    }
+    
+    private void createRunMenu(JMenu menu) {
+        JMenuItem runProject = new JMenuItem("Run Project");
+        runProject.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F6, 0));
+        menu.add(runProject);
+        
+        JMenuItem runFile = new JMenuItem("Run File");
+        runFile.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_SHIFT, InputEvent.SHIFT_DOWN_MASK));
+        menu.add(runFile);
+        
+        menu.addSeparator();
+        
+        JMenuItem runMain = new JMenuItem("Run Main Project");
+        menu.add(runMain);
+        
+        menu.addSeparator();
+        
+        JMenuItem buildProject = new JMenuItem("Build Project");
+        buildProject.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F11, 0));
+        menu.add(buildProject);
+        
+        JMenuItem cleanBuild = new JMenuItem("Clean and Build Project");
+        cleanBuild.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F11, InputEvent.SHIFT_DOWN_MASK));
+        menu.add(cleanBuild);
+        
+        JMenuItem clean = new JMenuItem("Clean Project");
+        menu.add(clean);
+    }
+    
+    private void createDebugMenu(JMenu menu) {
+        JMenuItem debugProject = new JMenuItem("Debug Project");
+        debugProject.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0));
+        menu.add(debugProject);
+        
+        JMenuItem debugFile = new JMenuItem("Debug File");
+        menu.add(debugFile);
+        
+        menu.addSeparator();
+        
+        menu.add(new JMenuItem("Debug Main Project"));
+        
+        menu.addSeparator();
+        
+        menu.add(new JMenuItem("Continue"));
+        menu.add(new JMenuItem("Step Over"));
+        menu.add(new JMenuItem("Step Into"));
+        menu.add(new JMenuItem("Step Out"));
+        
+        menu.addSeparator();
+        
+        menu.add(new JMenuItem("Toggle Breakpoint"));
+        menu.add(new JMenuItem("New Breakpoint"));
+        menu.add(new JMenuItem("View Breakpoints"));
+    }
+    
+    private void createProfileMenu(JMenu menu) {
+        JMenuItem profileProject = new JMenuItem("Profile Project");
+        menu.add(profileProject);
+        
+        JMenuItem profileFile = new JMenuItem("Profile File");
+        menu.add(profileFile);
+        
+        menu.addSeparator();
+        
+        menu.add(new JMenuItem("CPU Profiler"));
+        menu.add(new JMenuItem("Memory Profiler"));
+        menu.add(new JMenuItem("Thread Profiler"));
+        
+        menu.addSeparator();
+        
+        menu.add(new JMenuItem("Analyze Garbage Collection"));
+    }
+    
+    private void createTeamMenu(JMenu menu) {
+        menu.add(new JMenuItem("Clone Repository"));
+        menu.add(new JMenuItem("Commit"));
+        menu.add(new JMenuItem("Update"));
+        menu.add(new JMenuItem("Pull"));
+        menu.add(new JMenuItem("Push"));
+        
+        menu.addSeparator();
+        
+        menu.add(new JMenuItem("Create Branch"));
+        menu.add(new JMenuItem("Switch Branch"));
+        menu.add(new JMenuItem("Merge"));
+        
+        menu.addSeparator();
+        
+        menu.add(new JMenuItem("Show History"));
+        menu.add(new JMenuItem("Show Changes"));
+        menu.add(new JMenuItem("Revert Changes"));
+    }
+    
+    private void createToolMenu(JMenu menu) {
+        menu.add(new JMenuItem("Plugins"));
+        
+        menu.addSeparator();
+        
+        menu.add(new JMenuItem("Options"));
+        
+        menu.addSeparator();
+        
+        menu.add(new JMenuItem("JavaDoc"));
+        menu.add(new JMenuItem("JUnit"));
+        menu.add(new JMenuItem("Code Generator"));
+        menu.add(new JMenuItem("Database"));
+        
+        menu.addSeparator();
+        
+        menu.add(new JMenuItem("Create Desktop Shortcut"));
+        menu.add(new JMenuItem("Check for Updates"));
+    }
+    
+    private void createWindowMenu(JMenu menu) {
+        menu.add(new JMenuItem("New Window"));
+        menu.add(new JMenuItem("Close Window"));
+        
+        menu.addSeparator();
+        
+        menu.add(new JMenuItem("Maximize Window"));
+        menu.add(new JMenuItem("Minimize Window"));
+        
+        menu.addSeparator();
+        
+        menu.add(new JMenuItem("Tile Horizontally"));
+        menu.add(new JMenuItem("Tile Vertically"));
+        
+        menu.addSeparator();
+        
+        menu.add(new JMenuItem("Reset Windows"));
+    }
+    
+    private void createHelpMenu(JMenu menu) {
+        JMenuItem helpContents = new JMenuItem("Help Contents");
+        helpContents.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
+        menu.add(helpContents);
+        
+        menu.add(new JMenuItem("Getting Started"));
+        menu.add(new JMenuItem("Keyboard Shortcuts"));
+        
+        menu.addSeparator();
+        
+        menu.add(new JMenuItem("Tips of the Day"));
+        menu.add(new JMenuItem("NetBeans Feedback"));
+        
+        menu.addSeparator();
+        
+        menu.add(new JMenuItem("About NetBeans IDE"));
+    }
+
+}
